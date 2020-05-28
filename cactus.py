@@ -90,6 +90,11 @@ class Cactus(Plot, object):
         if float(mpl_version[:3]) < 1.5:
             ax.set_xticklabels(ax.get_xticks(), self.f_props)
             ax.set_yticklabels(ax.get_yticks(), self.f_props)
+	if self.y_max == 3600 and not self.y_log:
+            hour_yticks = np.arange(0, 4200, 600)
+            print 'yticks:', hour_yticks
+            ax.set_yticks(hour_yticks)
+            ax.set_yticklabels(hour_yticks)
 
         strFormatter = plt.FormatStrFormatter('%d')
         logFormatter = plt.LogFormatterMathtext(base=10)
