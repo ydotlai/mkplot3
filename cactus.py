@@ -61,16 +61,24 @@ class Cactus(Plot, object):
         plt.xlim(self.x_min, self.x_max if self.x_max else math.ceil(max([d[2] for d in data]) / float(100)) * 100)
         plt.ylim(self.y_min, self.y_max if self.y_max else self.timeout)
 
+	# setting font size
+	fsize = 18
+	plt.xticks(fontsize=fsize)
+	plt.yticks(fontsize=fsize)
+	#plt.xlabel(fontsize=fsize)
+	#plt.ylabel(fontsize=fsize)
+	#plt.legend(fontsize=fsize)
+
         # axes labels
         if self.x_label:
-            plt.xlabel(self.x_label)
+            plt.xlabel(self.x_label, fontsize=fsize)
         else:
-            plt.xlabel('instances')
+            plt.xlabel('instances', fontsize=fsize)
 
         if self.y_label:
-            plt.ylabel(self.y_label)
+            plt.ylabel(self.y_label, fontsize=fsize)
         else:
-            plt.ylabel('CPU time (s)')
+            plt.ylabel('CPU time (s)', fontsize=fsize)
 
         # choosing logarithmic scales if needed
         ax = plt.gca()
@@ -102,16 +110,19 @@ class Cactus(Plot, object):
         ax.yaxis.set_major_formatter(strFormatter if not self.y_log else logFormatter)
 
         # making the legend
+        mscale = 1.4
         if self.lgd_loc != 'off':
             lgtext = [d[0] for d in data]
-            lg = ax.legend(lines, lgtext, ncol=self.lgd_ncol, loc=self.lgd_loc, fancybox=self.lgd_fancy, shadow=self.lgd_shadow if self.lgd_alpha == 1.0 else False)
+            lg = ax.legend(lines, lgtext, ncol=self.lgd_ncol, loc=self.lgd_loc, fancybox=self.lgd_fancy, fontsize=fsize, markerscale=mscale, shadow=self.lgd_shadow if self.lgd_alpha == 1.0 else False)
             fr = lg.get_frame()
             fr.set_lw(1)
             fr.set_alpha(self.lgd_alpha)
             fr.set_edgecolor('black')
 
         # setting frame thickness
+        lwidth = 1.4
+        plt.setp(lines, linewidth=lwidth, markersize=7)
         for i in six.itervalues(ax.spines):
-            i.set_linewidth(1)
+            i.set_linewidth(lwidth)
 
         plt.savefig(self.save_to, bbox_inches='tight', transparent=self.transparent)
