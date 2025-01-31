@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/python3
 #-*- coding:utf-8 -*-
 ##
 ## cactus.py
@@ -61,13 +61,13 @@ class Cactus(Plot, object):
         plt.xlim(self.x_min, self.x_max if self.x_max else math.ceil(max([d[2] for d in data]) / float(100)) * 100)
         plt.ylim(self.y_min, self.y_max if self.y_max else self.timeout)
 
-	# setting font size
-	fsize = 18
-	plt.xticks(fontsize=fsize)
-	plt.yticks(fontsize=fsize)
-	#plt.xlabel(fontsize=fsize)
-	#plt.ylabel(fontsize=fsize)
-	#plt.legend(fontsize=fsize)
+        # setting font size
+        fsize = 18
+        plt.xticks(fontsize=fsize)
+        plt.yticks(fontsize=fsize)
+        #plt.xlabel(fontsize=fsize)
+        #plt.ylabel(fontsize=fsize)
+        #plt.legend(fontsize=fsize)
 
         # axes labels
         if self.x_label:
@@ -98,9 +98,9 @@ class Cactus(Plot, object):
         if float(mpl_version[:3]) < 1.5:
             ax.set_xticklabels(ax.get_xticks(), self.f_props)
             ax.set_yticklabels(ax.get_yticks(), self.f_props)
-	if self.y_max == 3600 and not self.y_log:
+        if self.y_max == 3600 and not self.y_log:
             hour_yticks = np.arange(0, 4200, 600)
-            print 'yticks:', hour_yticks
+            print('yticks:', hour_yticks)
             ax.set_yticks(hour_yticks)
             ax.set_yticklabels(hour_yticks)
 
